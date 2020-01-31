@@ -18,26 +18,26 @@
     <title>Portfolio Site</title>
   </head>
   <body>
-    <header class="header">
+    <header class="header container">
       <a class="logo">
         <img src="img/devjane.png" alt="site owner logo" />
       </a>
-      <button class="nav-toggle" aria-label="toggle navigation">      <span class="nav-toggle__line"></span>
+      <button class="nav-toggle" aria-label="toggle navigation"><span class="nav-toggle__line"></span>
       </button>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
           <li class="nav__item">
-            <a href="#" class="nav__link">My services</a>
+            <a href="#services" class="nav__link">My services</a>
           </li>
-          <li class="nav__item"><a href="#" class="nav__link">About me</a></li>
-          <li class="nav__item"><a href="#" class="nav__link">My Work</a></li>
+          <li class="nav__item"><a href="#about-me" class="nav__link">About me</a></li>
+          <li class="nav__item"><a href="#my-work" class="nav__link">My Work</a></li>
         </ul>
       </nav>
     </header>
 
     <!-- hero -->
-    <section class="hero container">
+    <section class="hero container" id="home">
       <h1 class="section__title section__title--hero">
         Hi, I am <strong>Jane Smith</strong>
       </h1>
@@ -82,7 +82,7 @@
           </p>
         </div>
       </div>
-      <a href="#work" class="btn">See my work</a>
+      <a href="#my-work" class="btn">See my work</a>
     </section>
     <!-- Services end -->
 
@@ -112,56 +112,56 @@
 
     <!-- My work -->
     <section class="my-work" id="my-work">
-      <h2 class="section__title section__title--my-work">Who am I?</h2>
+      <h2 class="section__title section__title--my-work">My work</h2>
       <p class="section__subtitle section__subtitle--my-work">A selection of my range of work</p>
       <div class="portfolio container">
         <!-- Portfolio item 01 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-01.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 02 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-02.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 03 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-03.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 04 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-04.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 05 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-05.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 06 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-06.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 07 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-07.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 08 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-08.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 09 -->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-09.jpg" alt="" class="portfolio__img" />
         </a>
 
         <!-- Portfolio item 0 0-->
-        <a href="#" class="portfolio__item">
+        <a href="portfolio-01.html" class="portfolio__item">
           <img src="img/portfolio-10.jpg" alt="" class="portfolio__img" />
         </a>
       </div>
@@ -169,7 +169,7 @@
     <!-- My work end -->
 
     <!-- Footer -->
-    <footer class="footer container">
+    <footer class="footer">
       <a href="mailto:hello@jane.dev" class="footer__link">hello@jane.dev</a>
       <ul class="social-list">
         <li class="social-list__item">
@@ -186,7 +186,7 @@
         </li>
       </ul>
     </footer>
-
     <!-- Footer end -->
+    <script src="script.js"></script>
   </body>
 </html>

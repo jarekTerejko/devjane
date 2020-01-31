@@ -24,6 +24,10 @@ $bs-primary: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: $clr-light;
   color: $clr-dark;
@@ -31,6 +35,10 @@ body {
   font-family: $ff-primary;
   font-size: $fs-body;
   line-height: 1.6;
+}
+
+body.dark {
+  background-color: #111;
 }
 
 .container {
@@ -87,6 +95,10 @@ h3 {
   font-size: $fs-h3;
 }
 
+p{
+  margin-bottom: .5rem;
+}
+
 .section__title {
   margin-bottom: 0.25rem;
 }
@@ -118,10 +130,39 @@ h3 {
 }
 
 // NAV
+@keyframes fadeIn {
+  0% {
+    // opacity: 0;
+    // transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+    
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+}
+
+
+
+
 .header {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+  position: relative;
 
   .logo {
     display: inline-block;
@@ -138,7 +179,7 @@ h3 {
     color: $clr-light;
     z-index: 1000;
     transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    transition: transform 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
 
     &__list {
       height: 100%;
@@ -150,6 +191,8 @@ h3 {
 
       .nav__item {
         margin: 1rem;
+        opacity: 0;
+        transform: translateX(100%);
 
         .nav__link {
           color: $clr-light;
@@ -174,7 +217,8 @@ h3 {
   position: absolute;
   right: 1rem;
   top: 1rem;
-  z-index: 1000;
+  z-index: 10000;
+  
 
   &__line {
     display: block;
@@ -183,7 +227,7 @@ h3 {
   &__line,
   &__line::before,
   &__line::after {
-    background: $clr-dark;
+    background: $clr-accent;
     width: 2rem;
     height: 3px;
     border-radius: 1rem;
@@ -208,6 +252,66 @@ h3 {
 
 .nav.open {
   transform: translateX(0);
+  
+
+  .nav__item {
+    opacity: 0;
+    animation: fadeIn .8s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+  }
+  .nav__item:nth-child(1) {
+    animation-delay: .1s;
+  }
+  .nav__item:nth-child(2) {
+    animation-delay: .2s;
+  }
+  .nav__item:nth-child(3) {
+    animation-delay: .3s;
+  }
+  .nav__item:nth-child(4) {
+    animation-delay: .4s;
+  }
+}
+
+.nav.closed {
+  transition-delay: .4s;
+  
+
+  .nav__item{
+    opacity: 1;
+    transform: translateX(0);
+    animation: fadeOut .6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+  }
+
+  .nav__item:nth-child(4) {
+    animation-delay: 0s;
+  }
+  .nav__item:nth-child(3) {
+    animation-delay: .1s;
+  }
+  .nav__item:nth-child(2) {
+    animation-delay: .2s;
+  }
+  .nav__item:nth-child(1) {
+    animation-delay: .3s;
+  }
+}
+
+
+
+.nav-toggle.open {
+  // position: fixed;
+
+  .nav-toggle__line{
+    transform: rotate(.625turn)
+  }
+
+  .nav-toggle__line::before{
+    transform: rotate(90deg) translateX(-6px);
+  }
+
+  .nav-toggle__line::after{
+    opacity: 0;
+  }
 }
 
 @media (min-width: 600px) {
@@ -216,12 +320,13 @@ h3 {
     grid-template-areas:
       "img title"
       "img subtitle";
-    grid-gap: 1rem;
+    column-gap: 1rem;
     width: min-content;
     margin: 0 auto;
     grid-auto-columns: min-content max-content;
 
     .section__title--hero {
+      grid-area: title;
       align-self: end;
     }
 
@@ -287,6 +392,8 @@ h3 {
       grid-column: 2;
       position: relative;
       z-index: 2;
+      box-shadow: $bs-primary;
+
     }
   }
 }
@@ -302,7 +409,7 @@ h3 {
   background-color: $clr-dark;
   background-image: url(img/services-bg.jpg);
   background-size: cover;
-  background-blend-mode: multiply;
+  background-blend-mode: hard-light;
   color: $clr-light;
   text-align: center;
   padding: 3rem 1rem;
@@ -338,12 +445,24 @@ h3 {
 
 // .my-work
 .my-work {
+  padding-top:3rem;
+  padding-bottom:3rem;
   background: $clr-dark;
   color: $clr-light;
-  text-align: center;
+  text-align: center; 
+
+  .section__title--my-work {
+    color: $clr-accent;
+  }
+
+  .section__subtitle--my-work {
+    // color: $clr-light;
+    color: inherit;
+  }
 
   .portfolio {
     display: grid;
+    gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     .portfolio__item {
       background: $clr-accent;
@@ -410,5 +529,24 @@ h3 {
         }
       }
     }
+  }
+}
+
+.portfolio-details {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  &__description{
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__img{
+    height: 40vh;
+    width: 100%;
+    object-fit: cover;
+    margin: 2rem 0;
   }
 }
