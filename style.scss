@@ -35,6 +35,7 @@ body {
   font-family: $ff-primary;
   font-size: $fs-body;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 body.dark {
@@ -95,8 +96,8 @@ h3 {
   font-size: $fs-h3;
 }
 
-p{
-  margin-bottom: .5rem;
+p {
+  margin-bottom: 0.5rem;
 }
 
 .section__title {
@@ -123,7 +124,8 @@ p{
   margin-bottom: 1rem;
 }
 
-.section__subtitle--my-work {
+.section__subtitle--my-work,
+.section__subtitle--contact-me {
   color: $clr-accent;
   font-weight: $fw-bold;
   margin-bottom: 2em;
@@ -146,7 +148,6 @@ p{
   0% {
     opacity: 1;
     transform: translateX(0);
-    
   }
 
   100% {
@@ -154,9 +155,6 @@ p{
     transform: translateX(500px);
   }
 }
-
-
-
 
 .header {
   display: flex;
@@ -218,7 +216,6 @@ p{
   right: 1rem;
   top: 1rem;
   z-index: 10000;
-  
 
   &__line {
     display: block;
@@ -252,64 +249,60 @@ p{
 
 .nav.open {
   transform: translateX(0);
-  
 
   .nav__item {
     opacity: 0;
-    animation: fadeIn .8s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
   }
   .nav__item:nth-child(1) {
-    animation-delay: .1s;
+    animation-delay: 0.1s;
   }
   .nav__item:nth-child(2) {
-    animation-delay: .2s;
+    animation-delay: 0.2s;
   }
   .nav__item:nth-child(3) {
-    animation-delay: .3s;
+    animation-delay: 0.3s;
   }
   .nav__item:nth-child(4) {
-    animation-delay: .4s;
+    animation-delay: 0.4s;
   }
 }
 
 .nav.closed {
-  transition-delay: .4s;
-  
+  transition-delay: 0.4s;
 
-  .nav__item{
+  .nav__item {
     opacity: 1;
     transform: translateX(0);
-    animation: fadeOut .6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+    animation: fadeOut 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
   }
 
   .nav__item:nth-child(4) {
     animation-delay: 0s;
   }
   .nav__item:nth-child(3) {
-    animation-delay: .1s;
+    animation-delay: 0.1s;
   }
   .nav__item:nth-child(2) {
-    animation-delay: .2s;
+    animation-delay: 0.2s;
   }
   .nav__item:nth-child(1) {
-    animation-delay: .3s;
+    animation-delay: 0.3s;
   }
 }
-
-
 
 .nav-toggle.open {
   // position: fixed;
 
-  .nav-toggle__line{
-    transform: rotate(.625turn)
+  .nav-toggle__line {
+    transform: rotate(0.625turn);
   }
 
-  .nav-toggle__line::before{
+  .nav-toggle__line::before {
     transform: rotate(90deg) translateX(-6px);
   }
 
-  .nav-toggle__line::after{
+  .nav-toggle__line::after {
     opacity: 0;
   }
 }
@@ -328,12 +321,21 @@ p{
     .section__title--hero {
       grid-area: title;
       align-self: end;
+      opacity: 0;
+      transform: translateY(-500px);
+      animation: slideTop 1s forwards;
+      animation-delay: 0.5s;
     }
 
     .section__img-hero {
       grid-area: img;
       position: relative;
       min-width: 250px;
+      opacity: 0;
+      transform: translateX(-500px);
+      animation: slideLeft 1s forwards;
+      animation-delay: 1.2s;
+      filter: flip;
     }
 
     .section__subtitle--hero {
@@ -344,8 +346,32 @@ p{
       text-align: right;
       position: relative;
       left: -1rem;
-      width: calc(100% + 1rem);
+      width: calc(100% + 2rem);
+      opacity: 0;
+      transform: translateX(2000px);
+      animation: slideRight 1s forwards;
+      animation-delay: 1.5s;
     }
+  }
+}
+
+@keyframes slideTop {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideRight {
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -393,8 +419,95 @@ p{
       position: relative;
       z-index: 2;
       box-shadow: $bs-primary;
-
     }
+  }
+}
+
+// .contact-form
+.contact-me {
+  background: $clr-dark;
+  background-image: url(img/portfolio-details-01.jpg);
+  background-blend-mode: multiply;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2rem 1rem 4rem;
+  color: $clr-light;
+}
+
+.section__title--contact-me {
+  color: $clr-accent;
+  text-align: center;
+}
+
+.section__subtitle--contact-me {
+  color: inherit;
+  text-align: center;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__row {
+    margin-bottom: 1.3rem;
+    position: relative;
+  }
+
+  &__label {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    // text-transform: uppercase;
+  }
+
+  &__name,
+  &__mail,
+  &__message {
+    border: none;
+    padding: 0.5rem;
+    width: 100%;
+    background: transparent;
+    border: 1px solid $clr-light;
+    border-radius: 0.5rem;
+    font-family: $ff-secondary;
+    font-size: 0.8rem;
+    color: inherit;
+  }
+
+  &__row i {
+    visibility: hidden;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+  }
+
+  &__info {
+    color: #e74c3c;
+    visibility: hidden;
+  }
+
+  &__submit-btn {
+    border: none;
+  }
+}
+
+.contact-form__row.success {
+  i.fa-check-circle {
+    color: #2ecc71;
+    visibility: visible;
+  }
+}
+
+.contact-form__row.error {
+  i.fa-exclamation-circle {
+    color: #e74c3c;
+    visibility: visible;
+  }
+
+  .contact-form__info {
+    visibility: visible;
   }
 }
 
@@ -445,11 +558,11 @@ p{
 
 // .my-work
 .my-work {
-  padding-top:3rem;
-  padding-bottom:3rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   background: $clr-dark;
   color: $clr-light;
-  text-align: center; 
+  text-align: center;
 
   .section__title--my-work {
     color: $clr-accent;
@@ -537,13 +650,13 @@ p{
   margin: 0 auto;
   padding: 1rem;
 
-  &__description{
+  &__description {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  &__img{
+  &__img {
     height: 40vh;
     width: 100%;
     object-fit: cover;
