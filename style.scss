@@ -6,7 +6,8 @@ $fw-bold: 900;
 
 $clr-light: #f2f2f2;
 $clr-dark: #303030;
-$clr-accent: #16e0bd;
+// $clr-accent: #16e0bd;
+$clr-accent: #42A5F5;
 
 $fs-h1: 3rem;
 $fs-h2: 2.25rem;
@@ -31,15 +32,10 @@ html {
 body {
   background: $clr-light;
   color: $clr-dark;
-  margin: 0;
   font-family: $ff-primary;
   font-size: $fs-body;
   line-height: 1.6;
   overflow-x: hidden;
-}
-
-body.dark {
-  background-color: #111;
 }
 
 .container {
@@ -64,19 +60,62 @@ strong {
 
 .btn {
   display: inline-block;
-  padding: 0.5rem 2.5rem;
-  background: $clr-accent;
-  color: $clr-dark;
+  background: transparent;
+  border: none;
   text-decoration: none;
+  padding: 0.5rem 2rem;
+  border-color: $clr-light;
+  color: $clr-light;
+  border-width: 0.1rem;
+  border-style: solid;
+  font-size: $fs-h3;
+  position: relative;
   cursor: pointer;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  outline: none;
   font-weight: $fw-bold;
-  transition: transform 0.2s ease-in-out;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    transition: 0.3s ease;
+    border-color: $clr-accent;
+    border-style: solid;
+  }
+
+  &::before {
+    top: -0.5em;
+    left: -0.6rem;
+    border-width: 0.1rem 0 0 0.1rem;
+  }
+  &::after {
+    bottom: -0.5em;
+    right: -0.5em;
+    border-width: 0 0.1rem 0.1rem 0;
+  }
 
   &:hover {
-    transform: scale(1.1);
+    color: $clr-dark;
+    border-color: $clr-accent;
+    background: $clr-accent;
+    transition: 0.3s ease;
+  }
+
+  &:hover::after
+   {
+    width: calc(100% + 1.2rem);
+    height: calc(100% + 1.25rem);
+  }
+
+  &:hover::before {
+    width: calc(100% + 1.2rem);
+    height: calc(100% + 1.25rem);
+  }
+
+  &:active {
+    transform: scale(0.99);
   }
 }
 
@@ -128,14 +167,14 @@ p {
 .section__subtitle--contact-me {
   color: $clr-accent;
   font-weight: $fw-bold;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 }
 
 // NAV
 @keyframes fadeIn {
   0% {
-    // opacity: 0;
-    // transform: translateX(100%);
+    opacity: 0;
+    transform: translateX(100%);
   }
 
   100% {
@@ -161,6 +200,7 @@ p {
   justify-content: space-between;
   padding: 1rem;
   position: relative;
+  
 
   .logo {
     display: inline-block;
@@ -249,6 +289,7 @@ p {
 
 .nav.open {
   transform: translateX(0);
+  
 
   .nav__item {
     opacity: 0;
@@ -266,6 +307,9 @@ p {
   .nav__item:nth-child(4) {
     animation-delay: 0.4s;
   }
+  .nav__item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
 }
 
 .nav.closed {
@@ -276,18 +320,20 @@ p {
     transform: translateX(0);
     animation: fadeOut 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
   }
-
-  .nav__item:nth-child(4) {
+  .nav__item:nth-child(5) {
     animation-delay: 0s;
   }
-  .nav__item:nth-child(3) {
+  .nav__item:nth-child(4) {
     animation-delay: 0.1s;
   }
-  .nav__item:nth-child(2) {
+  .nav__item:nth-child(3) {
     animation-delay: 0.2s;
   }
-  .nav__item:nth-child(1) {
+  .nav__item:nth-child(2) {
     animation-delay: 0.3s;
+  }
+  .nav__item:nth-child(1) {
+    animation-delay: 0.4s;
   }
 }
 
@@ -325,6 +371,8 @@ p {
       transform: translateY(-500px);
       animation: slideTop 1s forwards;
       animation-delay: 0.5s;
+      text-align: right;
+      
     }
 
     .section__img-hero {
@@ -389,6 +437,8 @@ p {
 
 @media (min-width: 600px) {
   .about-me {
+    padding-left: 2rem;
+    padding-right: 2rem;
     max-width: 800px;
     position: relative;
     display: grid;
@@ -479,7 +529,7 @@ p {
   &__row i {
     visibility: hidden;
     position: absolute;
-    top: 40px;
+    top: 42px;
     right: 10px;
   }
 
@@ -489,7 +539,8 @@ p {
   }
 
   &__submit-btn {
-    border: none;
+    margin-left: 0.5rem;
+    margin-top: 0.6rem;
   }
 }
 
@@ -521,7 +572,9 @@ p {
 .services {
   background-color: $clr-dark;
   background-image: url(img/services-bg.jpg);
+  background-attachment: fixed;
   background-size: cover;
+  background-position: center;
   background-blend-mode: hard-light;
   color: $clr-light;
   text-align: center;
@@ -553,14 +606,18 @@ p {
 
 // .about me
 .about-me {
-  margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  &__img {
+    margin: 0 auto;
+  }
 }
 
 // .my-work
 .my-work {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  background: $clr-dark;
   color: $clr-light;
   text-align: center;
 
@@ -569,14 +626,13 @@ p {
   }
 
   .section__subtitle--my-work {
-    // color: $clr-light;
-    color: inherit;
+    color: $clr-dark;
   }
 
   .portfolio {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     .portfolio__item {
       background: $clr-accent;
       overflow: hidden;
@@ -642,6 +698,11 @@ p {
         }
       }
     }
+  }
+
+  &__copyright {
+    margin-top: $fs-h3;
+    color: $clr-light;
   }
 }
 

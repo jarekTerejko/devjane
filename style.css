@@ -14,15 +14,10 @@ html {
 body {
   background: #f2f2f2;
   color: #303030;
-  margin: 0;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   overflow-x: hidden;
-}
-
-body.dark {
-  background-color: #111;
 }
 
 .container {
@@ -41,30 +36,71 @@ strong {
 }
 
 :focus {
-  outline: 3px solid #16e0bd;
+  outline: 3px solid #42A5F5;
   outline-offset: 3px;
 }
 
 .btn {
   display: inline-block;
-  padding: 0.5rem 2.5rem;
-  background: #16e0bd;
-  color: #303030;
+  background: transparent;
+  border: none;
   text-decoration: none;
+  padding: 0.5rem 2rem;
+  border-color: #f2f2f2;
+  color: #f2f2f2;
+  border-width: 0.1rem;
+  border-style: solid;
+  font-size: 1.25rem;
+  position: relative;
   cursor: pointer;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  outline: none;
   font-weight: 900;
-  -webkit-transition: -webkit-transform 0.2s ease-in-out;
-  transition: -webkit-transform 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+
+.btn::before, .btn::after {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  border-color: #42A5F5;
+  border-style: solid;
+}
+
+.btn::before {
+  top: -0.5em;
+  left: -0.6rem;
+  border-width: 0.1rem 0 0 0.1rem;
+}
+
+.btn::after {
+  bottom: -0.5em;
+  right: -0.5em;
+  border-width: 0 0.1rem 0.1rem 0;
 }
 
 .btn:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  color: #303030;
+  border-color: #42A5F5;
+  background: #42A5F5;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.btn:hover::after {
+  width: calc(100% + 1.2rem);
+  height: calc(100% + 1.25rem);
+}
+
+.btn:hover::before {
+  width: calc(100% + 1.2rem);
+  height: calc(100% + 1.25rem);
+}
+
+.btn:active {
+  -webkit-transform: scale(0.99);
+          transform: scale(0.99);
 }
 
 .section__img-hero {
@@ -106,7 +142,7 @@ p {
 
 .section__subtitle--hero,
 .section__subtitle--about-me {
-  background: #16e0bd;
+  background: #42A5F5;
   padding: 0.25rem 1rem;
   font-family: "Source Code Pro", monospace;
   margin-bottom: 1rem;
@@ -114,13 +150,16 @@ p {
 
 .section__subtitle--my-work,
 .section__subtitle--contact-me {
-  color: #16e0bd;
+  color: #42A5F5;
   font-weight: 900;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 }
 
 @-webkit-keyframes fadeIn {
   0% {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
   100% {
     opacity: 1;
@@ -131,6 +170,9 @@ p {
 
 @keyframes fadeIn {
   0% {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
   }
   100% {
     opacity: 1;
@@ -232,7 +274,7 @@ p {
 }
 
 .header .nav__list .nav__item .nav__link:hover {
-  color: #16e0bd;
+  color: #42A5F5;
 }
 
 .nav-toggle {
@@ -252,7 +294,7 @@ p {
 }
 
 .nav-toggle__line, .nav-toggle__line::before, .nav-toggle__line::after {
-  background: #16e0bd;
+  background: #42A5F5;
   width: 2rem;
   height: 3px;
   border-radius: 1rem;
@@ -308,6 +350,11 @@ p {
           animation-delay: 0.4s;
 }
 
+.nav.open .nav__item:nth-child(5) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
 .nav.closed {
   -webkit-transition-delay: 0.4s;
           transition-delay: 0.4s;
@@ -321,24 +368,29 @@ p {
           animation: fadeOut 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
 }
 
-.nav.closed .nav__item:nth-child(4) {
+.nav.closed .nav__item:nth-child(5) {
   -webkit-animation-delay: 0s;
           animation-delay: 0s;
 }
 
-.nav.closed .nav__item:nth-child(3) {
+.nav.closed .nav__item:nth-child(4) {
   -webkit-animation-delay: 0.1s;
           animation-delay: 0.1s;
 }
 
-.nav.closed .nav__item:nth-child(2) {
+.nav.closed .nav__item:nth-child(3) {
   -webkit-animation-delay: 0.2s;
           animation-delay: 0.2s;
 }
 
-.nav.closed .nav__item:nth-child(1) {
+.nav.closed .nav__item:nth-child(2) {
   -webkit-animation-delay: 0.3s;
           animation-delay: 0.3s;
+}
+
+.nav.closed .nav__item:nth-child(1) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
 }
 
 .nav-toggle.open .nav-toggle__line {
@@ -383,6 +435,7 @@ p {
             animation: slideTop 1s forwards;
     -webkit-animation-delay: 0.5s;
             animation-delay: 0.5s;
+    text-align: right;
   }
   .hero .section__img-hero {
     -ms-grid-row: 1;
@@ -488,6 +541,8 @@ p {
 
 @media (min-width: 600px) {
   .about-me {
+    padding-left: 2rem;
+    padding-right: 2rem;
     max-width: 800px;
     position: relative;
     display: -ms-grid;
@@ -536,7 +591,7 @@ p {
 }
 
 .section__title--contact-me {
-  color: #16e0bd;
+  color: #42A5F5;
   text-align: center;
 }
 
@@ -577,7 +632,7 @@ p {
 .contact-form__row i {
   visibility: hidden;
   position: absolute;
-  top: 40px;
+  top: 42px;
   right: 10px;
 }
 
@@ -587,7 +642,8 @@ p {
 }
 
 .contact-form__submit-btn {
-  border: none;
+  margin-left: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 .contact-form__row.success i.fa-check-circle {
@@ -612,7 +668,9 @@ p {
 .services {
   background-color: #303030;
   background-image: url(img/services-bg.jpg);
+  background-attachment: fixed;
   background-size: cover;
+  background-position: center;
   background-blend-mode: hard-light;
   color: #f2f2f2;
   text-align: center;
@@ -629,7 +687,7 @@ p {
 }
 
 .section__title--services {
-  color: #16e0bd;
+  color: #42A5F5;
   position: relative;
 }
 
@@ -644,35 +702,39 @@ p {
 }
 
 .about-me {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.about-me__img {
   margin: 0 auto;
 }
 
 .my-work {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  background: #303030;
   color: #f2f2f2;
   text-align: center;
 }
 
 .my-work .section__title--my-work {
-  color: #16e0bd;
+  color: #42A5F5;
 }
 
 .my-work .section__subtitle--my-work {
-  color: inherit;
+  color: #303030;
 }
 
 .my-work .portfolio {
   display: -ms-grid;
   display: grid;
   gap: 1rem;
-  -ms-grid-columns: (minmax(300px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  -ms-grid-columns: (minmax(230px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
 .my-work .portfolio .portfolio__item {
-  background: #16e0bd;
+  background: #42A5F5;
   overflow: hidden;
 }
 
@@ -702,7 +764,7 @@ p {
 
 .footer {
   background: #111;
-  color: #16e0bd;
+  color: #42A5F5;
   text-align: center;
   padding: 3rem 1rem;
 }
@@ -747,6 +809,11 @@ p {
 
 .footer .social-list__item .social-list__link:hover {
   opacity: 0.7;
+}
+
+.footer__copyright {
+  margin-top: 1.25rem;
+  color: #f2f2f2;
 }
 
 .portfolio-details {

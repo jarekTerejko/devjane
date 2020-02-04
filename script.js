@@ -1,3 +1,4 @@
+// nav
 const navBtn = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".nav");
 const navLinks = document.querySelectorAll(".nav__link");
@@ -7,6 +8,7 @@ navBtn.addEventListener("click", () => {
     nav.classList.remove("open");
     navBtn.classList.remove("open");
     nav.classList.add("closed");
+
   } else {
     nav.classList.remove("closed");
     navBtn.classList.add("open");
@@ -23,8 +25,8 @@ navLinks.forEach(link => {
   });
 });
 
-// form
 
+// form
 const form = document.querySelector(".contact-form");
 const userName = document.querySelector(".contact-form__name");
 const mail = document.querySelector(".contact-form__mail");
@@ -54,7 +56,7 @@ const checkInputs = () => {
   if (emailValue === "") {
     setErrorFor(mail, "Email cannot be blank...");
   } else if (!isMailValid(emailValue)) {
-    setErrorFor(email, "Please provide a valid email");
+    setErrorFor(mail, "Please provide a valid email");
   } else {
     setSuccessFor(mail);
   }
@@ -83,3 +85,9 @@ const isMailValid = email => {
     email
   );
 };
+
+
+// footer year
+const today = new Date()
+const year = today.getFullYear()
+document.querySelector('.footer__copyright .year').textContent = year
