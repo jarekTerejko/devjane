@@ -8,7 +8,6 @@ navBtn.addEventListener("click", () => {
     nav.classList.remove("open");
     navBtn.classList.remove("open");
     nav.classList.add("closed");
-
   } else {
     nav.classList.remove("closed");
     navBtn.classList.add("open");
@@ -24,7 +23,6 @@ navLinks.forEach(link => {
     }
   });
 });
-
 
 // form
 const form = document.querySelector(".contact-form");
@@ -86,8 +84,27 @@ const isMailValid = email => {
   );
 };
 
-
 // footer year
-const today = new Date()
-const year = today.getFullYear()
-document.querySelector('.footer__copyright .year').textContent = year
+const today = new Date();
+const year = today.getFullYear();
+document.querySelector(".footer__copyright .year").textContent = year;
+
+// theme toggle
+const checkbox = document.querySelector("input[name=theme]");
+
+checkbox.addEventListener("change", () => {
+  if (checkbox.checked) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeTransition();
+  } else {
+    themeTransition();
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+});
+
+const themeTransition = () => {
+  document.documentElement.classList.add("theme-transition");
+  setTimeout(() => {
+    document.documentElement.classList.remove("theme-transition");
+  }, 1000);
+};

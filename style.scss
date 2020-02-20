@@ -4,10 +4,12 @@ $ff-secondary: "Source Code Pro", monospace;
 $fw-reg: 300;
 $fw-bold: 900;
 
-$clr-light: #f2f2f2;
-$clr-dark: #303030;
-// $clr-accent: #16e0bd;
-$clr-accent: #42A5F5;
+// var(--clr-light): #f2f2f2;
+// var(--clr-dark): #303030;
+// var(--clr-light): #f2f2f2;
+// var(--clr-dark): #303030;
+// var(--clr-accent): #16e0bd;
+// var(--clr-accent): #42A5F5;
 
 $fs-h1: 3rem;
 $fs-h2: 2.25rem;
@@ -27,11 +29,28 @@ $bs-primary: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
 
 html {
   scroll-behavior: smooth;
+  --clr-light: #f2f2f2;
+  --clr-dark: #303030;
+  --clr-accent: #42a5f5;
+}
+
+html[data-theme="dark"] {
+  --clr-light: #303030;
+  --clr-dark: #f2f2f2;
+  --clr-accent: #29c7ac;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *:before,
+html.theme-transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
 }
 
 body {
-  background: $clr-light;
-  color: $clr-dark;
+  background: var(--clr-light);
+  color: var(--clr-dark);
   font-family: $ff-primary;
   font-size: $fs-body;
   line-height: 1.6;
@@ -54,7 +73,7 @@ strong {
 }
 
 :focus {
-  outline: 3px solid $clr-accent;
+  outline: 3px solid var(--clr-accent);
   outline-offset: 3px;
 }
 
@@ -64,8 +83,10 @@ strong {
   border: none;
   text-decoration: none;
   padding: 0.5rem 2rem;
-  border-color: $clr-light;
-  color: $clr-light;
+  border-color: #f2f2f2;
+  color: #f2f2f2;
+  // border-color: var(--clr-light);
+  // color: var(--clr-light);
   border-width: 0.1rem;
   border-style: solid;
   font-size: $fs-h3;
@@ -81,7 +102,7 @@ strong {
     width: 2rem;
     height: 2rem;
     transition: 0.3s ease;
-    border-color: $clr-accent;
+    border-color: var(--clr-accent);
     border-style: solid;
   }
 
@@ -97,14 +118,13 @@ strong {
   }
 
   &:hover {
-    color: $clr-dark;
-    border-color: $clr-accent;
-    background: $clr-accent;
+    color: var(--clr-dark);
+    border-color: var(--clr-accent);
+    background: var(--clr-accent);
     transition: 0.3s ease;
   }
 
-  &:hover::after
-   {
+  &:hover::after {
     width: calc(100% + 1.2rem);
     height: calc(100% + 1.25rem);
   }
@@ -157,7 +177,7 @@ p {
 
 .section__subtitle--hero,
 .section__subtitle--about-me {
-  background: $clr-accent;
+  background: var(--clr-accent);
   padding: 0.25rem 1rem;
   font-family: $ff-secondary;
   margin-bottom: 1rem;
@@ -165,7 +185,7 @@ p {
 
 .section__subtitle--my-work,
 .section__subtitle--contact-me {
-  color: $clr-accent;
+  color: var(--clr-accent);
   font-weight: $fw-bold;
   margin-bottom: 2rem;
 }
@@ -200,11 +220,12 @@ p {
   justify-content: space-between;
   padding: 1rem;
   position: relative;
-  
 
   .logo {
-    display: inline-block;
-    max-width: 100px;
+    text-decoration: none;
+    color: var(--clr-accent);
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   .nav {
@@ -213,8 +234,10 @@ p {
     right: 0;
     bottom: 0;
     top: 0;
-    background: $clr-dark;
-    color: $clr-light;
+    // background-color: var(--clr-dark);
+    background-color: #303030;
+    // color: var(--clr-light);
+    color: #f2f2f2;
     z-index: 1000;
     transform: translateX(100%);
     transition: transform 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -233,13 +256,13 @@ p {
         transform: translateX(100%);
 
         .nav__link {
-          color: $clr-light;
+          color: #f2f2f2;
           font-size: $fs-h2;
           text-decoration: none;
           transition: color 0.3s;
 
           &:hover {
-            color: $clr-accent;
+            color: var(--clr-accent);
           }
         }
       }
@@ -248,13 +271,14 @@ p {
 }
 
 .nav-toggle {
-  padding: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background: none;
   border: 0;
   cursor: pointer;
   position: absolute;
   right: 1rem;
-  top: 1rem;
+  top: 1.25rem;
   z-index: 10000;
 
   &__line {
@@ -264,7 +288,7 @@ p {
   &__line,
   &__line::before,
   &__line::after {
-    background: $clr-accent;
+    background: var(--clr-accent);
     width: 2rem;
     height: 3px;
     border-radius: 1rem;
@@ -289,7 +313,6 @@ p {
 
 .nav.open {
   transform: translateX(0);
-  
 
   .nav__item {
     opacity: 0;
@@ -372,7 +395,6 @@ p {
       animation: slideTop 1s forwards;
       animation-delay: 0.5s;
       text-align: right;
-      
     }
 
     .section__img-hero {
@@ -475,18 +497,24 @@ p {
 
 // .contact-form
 .contact-me {
-  background: $clr-dark;
-  background-image: url(img/portfolio-details-01.jpg);
-  background-blend-mode: multiply;
+  background: var(--clr-dark);
+  background-image: linear-gradient(
+      to bottom,
+      rgba(48, 48, 48, 0.6),
+      rgba(48, 48, 48, 1)
+    ),
+    url(img/portfolio-details-01.jpg);
+  // background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 2rem 1rem 4rem;
-  color: $clr-light;
+  color: #f2f2f2;
+  // color: var(--clr-light);
 }
 
 .section__title--contact-me {
-  color: $clr-accent;
+  color: var(--clr-accent);
   text-align: center;
 }
 
@@ -519,7 +547,7 @@ p {
     padding: 0.5rem;
     width: 100%;
     background: transparent;
-    border: 1px solid $clr-light;
+    border: 1px solid #f2f2f2;
     border-radius: 0.5rem;
     font-family: $ff-secondary;
     font-size: 0.8rem;
@@ -570,13 +598,16 @@ p {
 
 // .services
 .services {
-  background-color: $clr-dark;
-  background-image: url(img/services-bg.jpg);
+  // background-color: var(--clr-dark);
+  background-color: #303030;
+  background-image: linear-gradient(rgba(48, 48, 48, 0.4)),
+    url(img/services-bg.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  background-blend-mode: hard-light;
-  color: $clr-light;
+  // background-blend-mode: overlay;
+  // color: var(--clr-light);
+  color: #f2f2f2;
   text-align: center;
   padding: 3rem 1rem;
 }
@@ -591,7 +622,7 @@ p {
 }
 
 .section__title--services {
-  color: $clr-accent;
+  color: var(--clr-accent);
   position: relative;
 }
 .section__title--services::after {
@@ -618,15 +649,15 @@ p {
 .my-work {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: $clr-light;
+  color: var(--clr-light);
   text-align: center;
 
   .section__title--my-work {
-    color: $clr-accent;
+    color: var(--clr-accent);
   }
 
   .section__subtitle--my-work {
-    color: $clr-dark;
+    color: var(--clr-dark);
   }
 
   .portfolio {
@@ -634,7 +665,7 @@ p {
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     .portfolio__item {
-      background: $clr-accent;
+      background: var(--clr-accent);
       overflow: hidden;
 
       &:focus {
@@ -662,7 +693,7 @@ p {
 
 .footer {
   background: #111;
-  color: $clr-accent;
+  color: var(--clr-accent);
   text-align: center;
   padding: 3rem 1rem;
 
@@ -700,9 +731,52 @@ p {
     }
   }
 
+  input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 26px;
+    background: var(--clr-accent);
+    display: block;
+    margin: 0 auto;
+    border-radius: 999px;
+    position: relative;
+  }
+
+  label:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 999px;
+    transition: 0.3s;
+  }
+
+  input:checked + label {
+    background: var(--clr-accent);
+  }
+
+  input:checked + label:after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+  }
+
+  label:active:after {
+    width: 45px;
+  }
+
   &__copyright {
     margin-top: $fs-h3;
-    color: $clr-light;
+    color: #f2f2f2;
   }
 }
 
