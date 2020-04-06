@@ -91,14 +91,24 @@ document.querySelector(".footer__copyright .year").textContent = year;
 
 // theme toggle
 const checkbox = document.querySelector("input[name=theme]");
+const currentTheme = localStorage.getItem('currentTheme')
+
+if(currentTheme){
+  document.documentElement.setAttribute("data-theme", "dark");
+  checkbox.checked = true
+}
 
 checkbox.addEventListener("change", () => {
   if (checkbox.checked) {
     document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("currentTheme", "themeActive")
     themeTransition();
   } else {
     themeTransition();
     document.documentElement.setAttribute("data-theme", "light");
+    checkbox.checked = false
+
+    localStorage.removeItem("currentTheme")
   }
 });
 
